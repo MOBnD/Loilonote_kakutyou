@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>画像コピー機能</title>
+  <title>iOS対応画像コピー機能</title>
   <style>
     .image-container {
       display: flex;
@@ -34,26 +34,24 @@
   </div>
 
   <script>
-    // ボタンがクリックされたときの処理
     document.getElementById('copy-button').addEventListener('click', async () => {
       try {
         const imageElement = document.getElementById('image-to-copy');
-        
-        // 画像をCanvasに描画
+
+        // Canvasに画像を描画
         const canvas = document.createElement('canvas');
         canvas.width = imageElement.naturalWidth;
         canvas.height = imageElement.naturalHeight;
         const ctx = canvas.getContext('2d');
         ctx.drawImage(imageElement, 0, 0);
 
-        // CanvasをBlobに変換
-        const blob = await new Promise(resolve => canvas.toBlob(resolve));
+        // CanvasをBase64データURLに変換
+        const dataURL = canvas.toDataURL('image/png');
 
-        // ClipboardにBlobをコピー
-        const item = new ClipboardItem({ 'image/png': blob });
-        await navigator.clipboard.write([item]);
+        // iOS対応: Base64文字列をクリップボードにコピー
+        await navigator.clipboard.writeText(dataURL);
 
-        alert('画像をクリップボードにコピーしました！');
+        alert('画像のデータURLをクリップボードにコピーしました！\n（iOS SafariではデータURLがコピーされます）');
       } catch (err) {
         console.error('画像のコピーに失敗しました:', err);
         alert('画像のコピーに失敗しました。');
