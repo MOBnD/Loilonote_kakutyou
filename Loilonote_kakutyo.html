@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" href="./css/styles.css">
   <title>iOS対応画像コピー機能</title>
   <style>
     .image-container {
@@ -34,6 +36,9 @@
   </div>
 
   <script>
+    if (navigator.serviceWorker) {
+        navigator.serviceWorker.register ('/pwa_test/service-worker.js')
+      }
     document.getElementById('copy-button').addEventListener('click', async () => {
       try {
         const imageElement = document.getElementById('image-to-copy');
