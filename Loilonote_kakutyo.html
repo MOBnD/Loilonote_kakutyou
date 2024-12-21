@@ -1,24 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head></head>
-  <body>
-    <img id="img" src="IMG_0005.jpeg" />
-    <button id="copyButton">Copy</button>
-    <script>
-      const copyImage = async () => {
-        const img = document.getElementById("img");
-        const responsePromise = await fetch(img.src);
-        const blob = responsePromise.blob();
-        const data = [new ClipboardItem({ "image/png": blob })];
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>画像コピー機能</title>
+  <style>
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 50px;
+    }
+    img {
+      max-width: 300px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="image-container">
+    <img id="image-to-copy" src="https://via.placeholder.com/300" alt="Sample Image">
+    <button id="copy-button">画像をコピー</button>
+  </div>
 
-        navigator.clipboard.write(data).then(
-          () => { console.log("success"); },
-          (msg) => { console.log(`fail: ${msg}`); }
-        );
-      };
+  <script>
+    // ボタンがクリックされたときの処理
+    document.getElementById('copy-button').addEventListener('click', async () => {
+      try {
+        const imageElement = document.getElementById('image-to-copy');
+        
+        // 画像をCanvasに描画
+        const canvas = document.createElement('canvas');
+        canvas.width = imageElement.naturalWidth;
+        canvas.height = imageElement.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(imageElement, 0, 0);
 
-      const button = document.getElementById("copyButton");
-      button.addEventListener("click", copyImage);
-    </script>
-  </body>
+        // CanvasをBlobに変換
+        const blob = await new Promise(resolve => canvas.toBlob(resolve));
+
+        // ClipboardにBlobをコピー
+        const item = new ClipboardItem({ 'image/png': blob });
+        await navigator.clipboard.write([item]);
+
+        alert('画像をクリップボードにコピーしました！');
+      } catch (err) {
+        console.error('画像のコピーに失敗しました:', err);
+        alert('画像のコピーに失敗しました。');
+      }
+    });
+  </script>
+</body>
 </html>
