@@ -1,0 +1,561 @@
+@charset "utf-8";
+
+
+
+/*Font Awesomeの読み込み
+---------------------------------------------------------------------------*/
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css");
+
+/*lightbox.cssの読み込み
+---------------------------------------------------------------------------*/
+@import url(https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.10.0/css/lightbox.css);
+
+/*slick.cssの読み込み
+---------------------------------------------------------------------------*/
+@import url("https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css");
+
+/*vegas.cssの読み込み
+---------------------------------------------------------------------------*/
+@import url("https://cdnjs.cloudflare.com/ajax/libs/vegas/2.5.4/vegas.min.css");
+
+
+
+/*animation1のキーフレーム設定（開閉ブロックのアニメーションに使用）
+---------------------------------------------------------------------------*/
+@keyframes animation1 {
+	0% {left: -200px;}
+	100% {left: 0px;}
+}
+
+
+/*opa1のキーフレーム設定（汎用的）
+---------------------------------------------------------------------------*/
+@keyframes opa1 {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+
+
+/*全体の設定
+---------------------------------------------------------------------------*/
+body * {box-sizing: border-box;}
+html,body {height: 100%;}
+
+body {
+	margin: 0;padding:0;
+	font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", Meiryo, "メイリオ", "Osaka", "MS PGothic", "ＭＳ Ｐゴシック", sans-serif;	/*フォント種類（ゴシック）*/
+	-webkit-text-size-adjust: none;
+	background: #fff;	/*背景色*/
+	color: #777;		/*文字色*/
+	line-height: 2;		/*行間*/
+}
+
+/*リセット*/
+figure {margin: 0;}
+dd {margin: 0;}
+nav,ul,li,ol {margin: 0;padding: 0;}
+nav ul {list-style: none;}
+
+/*table全般の設定*/
+table {border-collapse:collapse;}
+
+/*画像全般の設定*/
+img {border: none;max-width: 100%;height: auto;vertical-align: middle;}
+
+/*videoタグ*/
+video {max-width: 100%;}
+
+/*iframeタグ*/
+iframe {width: 100%;}
+
+/*他*/
+input {font-size: 1rem;}
+section + section {
+	margin-top: 3rem;
+}
+
+
+/*文字サイズの設定。
+もしデフォルトを「大」にしたい場合は、js/fontSizeChanger.jsの中のコメント箇所を読んで下さい。
+---------------------------------------------------------------------------*/
+/*「大」ボタンを押した時の文字サイズ*/
+html.f-large {
+	font-size: 28px;
+}
+
+/*「小」ボタンを押した時の文字サイズ*/
+html.f-small {
+	font-size: 16px;
+}
+
+
+/*リンクテキスト全般の設定
+---------------------------------------------------------------------------*/
+a {
+	color: #777;	/*文字色*/
+	transition: 0.3s;	/*hoverまでにかける時間。0.3秒。*/
+}
+
+/*マウスオン時*/
+a:hover {
+	filter: brightness(1.1);	/*少しだけ明るくする*/
+}
+
+
+/*コンテナー（サイト全体を囲むブロック）
+---------------------------------------------------------------------------*/
+#container {
+	height: 100%;
+	display: flex;	/*flexボックスを使う指定*/
+	flex-direction: column;	/*子要素を縦並びにする*/
+	justify-content: space-between;	/*並びかたの種類の指定*/
+	max-width: 1800px;	/*サイトの最大幅。これ以上広がらない。*/
+	margin: 0 auto;
+}
+
+
+/*コンテンツ
+---------------------------------------------------------------------------*/
+#contents {
+	flex: 1;
+	padding: 3vw;	/*コンテンツ内の余白*/
+}
+
+/*コンテンツ内のulとol*/
+#contents ul,#contents ol {
+	margin-left: 2rem;
+}
+
+
+/*header（ロゴが入った最上段のブロック）
+---------------------------------------------------------------------------*/
+/*ヘッダーブロック*/
+header {
+	padding: 20px 120px 20px 3vw;	/*上下、左右へのヘッダー内の余白*/
+	display: flex;					/*flexボックスを使う指定*/
+	justify-content: space-between;	/*並びかたの種類の指定*/
+	align-items: center;			/*垂直揃えの指定。天地中央に配置されるように。*/
+	background: #eee;				/*背景色*/
+}
+
+/*ロゴ*/
+#logo img {display: block;}
+#logo {
+	max-width: 250px;	/*幅*/
+}
+
+	/*画面幅600px以下の追加指定*/
+	@media screen and (max-width:600px) {
+
+	/*ヘッダーブロック*/
+	header {
+		flex-direction: column;	/*子要素を縦並びにする*/
+		align-items: stretch;	/*デフォルトに戻す*/
+		padding-right: 80px;	/*右側へのpaddingだけ上書き*/
+	}
+
+	}/*追加指定ここまで*/
+
+
+	/*画面幅500px「以下」の追加指定。文字サイズボタンにロゴが重ならないようにする為。*/
+	@media screen and (max-width:500px) {
+	
+	/*ロゴ*/
+	#logo {
+		width: calc(100% - 160px);	/*画面幅を500px以下にした際に、ロゴが重ならないように160pxの部分を調整します。*/
+	}
+	
+	}/*追加指定ここまで*/
+
+
+/*文字サイズ変更ボタン
+---------------------------------------------------------------------------*/
+/*ボタンブロック全体*/
+#f-size {
+	background: #fff;	/*背景色*/
+	box-shadow: 0px 0px 8px rgba(0,0,0,0.2);	/*影の設定。右へ、下へ、ぼかし幅。rgbaは色設定で0,0,0は黒。0.2は20%色がついた状態の事。*/
+	border-radius: 0px 0px 5px 5px;	/*角丸のサイズ。左上、右上、右下、左下への順。*/
+	display: flex;			/*flexボックスを使う指定*/
+	align-items: center;	/*垂直揃えの指定。天地中央に配置されるように。*/
+	padding: 10px 15px;		/*ブロック内の余白。上下、左右へ。*/
+	position: absolute;		/*headerに対して絶対配置する*/
+	right: 3%;				/*右からの配置場所*/
+	top: 0px;				/*上からの配置場所*/
+}
+
+	/*画面幅900px「以下」の追加指定。ハンバーガーアイコンが出る分、位置をずらす。*/
+	@media screen and (max-width:900px) {
+	
+	#f-size {
+		right: 100px;
+	}
+	
+	}/*追加指定ここまで*/
+
+
+/*「文字サイズ」のテキスト*/
+#f-size p {
+	margin: 0;
+	margin-right: 10px;	/*右側に空けるスペース。ボタンとの間にとるスペースです。*/
+	font-size: 0.85rem;	/*文字サイズ*/
+}
+
+	/*画面幅600px「以下」の追加指定。*/
+	@media screen and (max-width:600px) {
+	
+	#f-size p {
+		display: none;	/*画面が狭くなるので、非表示にする*/
+	}
+	
+	}/*追加指定ここまで*/
+
+
+/*「小」「大」を囲むブロック*/
+#f-size ul {
+	list-style: none;margin: 0;padding: 0;
+	display: flex;			/*flexボックスを使う指定*/
+	align-items: center;	/*垂直揃えの指定。天地中央に配置されるように。*/
+}
+
+/*「小」ボタン設定*/
+#f-size ul li#f-small::before {
+	display: block;
+	content: "小";		/*「小」の文字を出力*/
+	font-size: 16px;	/*文字サイズ*/
+	width: 40px;		/*幅*/
+	line-height: 40px;	/*高さ*/
+	text-align: center;	/*内容をセンタリング*/
+	background: #eee;	/*背景色*/
+}
+#f-size ul li#f-small {
+	margin-right: 5px;	/*右側に空けるスペース。「大」との間の隙間です。*/
+}
+
+/*「大」ボタン設定*/
+#f-size ul li#f-large::before {
+	display: block;
+	content: "大";		/*「大」の文字を出力*/
+	font-size: 30px;	/*文字サイズ*/
+	width: 50px;		/*幅*/
+	line-height: 50px;	/*高さ*/
+	text-align: center;	/*内容をセンタリング*/
+	background: #eee;	/*背景色*/
+}
+
+/*選択中の設定*/
+#f-size li#f-large.current::before,
+#f-size li#f-small.current::before {
+	background: #ff0000;	/*背景色*/
+	color: #fff;			/*文字色*/
+}
+
+/*マウスオン時にリンクテキストと同じような手のマークが出るように*/
+#f-size li {
+	cursor: pointer;
+}
+
+
+/*メニューブロック初期設定
+---------------------------------------------------------------------------*/
+/*メニューをデフォルトで非表示*/
+#menubar {display: none;}
+#menubar ul {list-style: none;margin: 0;padding: 0;}
+
+/*上で非表示にしたメニューを表示させる為の設定*/
+.large-screen #menubar {display: block;}
+.small-screen #menubar.display-block {display: block;}
+
+/*3本バーをデフォルトで非表示*/
+#menubar_hdr.display-none {display: none;}
+
+/*ドロップダウンをデフォルトで非表示*/
+.ddmenu_parent ul {display: none;}
+
+/*ドロップダウンの親メニューのカーソル表示を変更*/
+a.ddmenu {cursor: default;}
+
+/*ddmenuを指定しているメニューに矢印アイコンをつける設定*/
+a.ddmenu::before {
+	font-family: "Font Awesome 6 Free";	/*Font Awesome Free版を使う指定*/
+	content: "\f078";	/*使いたいアイコン名（Font Awesome）をここで指定*/
+	font-weight: bold;	/*この手の設定がないとアイコンが出ない場合があります*/
+	margin-right: 1em;	/*アイコンとテキストとの間に空けるスペース*/
+}
+
+
+/*大きな端末、小さな端末共通のメニューブロック設定
+---------------------------------------------------------------------------*/
+/*メニュー１個あたりの設定*/
+#menubar a {
+	display: block;text-decoration: none;
+	padding: 0.5rem 0;	/*上下、左右へのメニュー内の余白*/
+}
+
+
+/*大きな端末用のメニューブロック設定
+---------------------------------------------------------------------------*/
+/*メニューブロック全体の設定*/
+.large-screen #menubar > nav > ul {
+	display: flex;	/*横並びにする*/
+	justify-content: space-between;
+}
+.large-screen #menubar ul {
+	border: 1px solid #ccc;	/*枠線の幅、線種、色*/
+}
+
+/*メニュー１個あたりの設定*/
+.large-screen #menubar li {
+	flex: 1;			/*個々のメニューを均等にし、幅いっぱいまで使う設定*/
+	position: relative;	/*ドロップダウンの幅となる基準を作っておく*/
+	text-align: center;	/*テキストをセンタリング*/
+}
+.large-screen #menubar li a {
+	background: #ddd;	/*背景色*/
+}
+
+
+/*大きな端末、小さな端末、共通のドロップダウンメニュー設定
+---------------------------------------------------------------------------*/
+/*ドロップダウンブロック*/
+.large-screen #menubar ul ul,
+.small-screen #menubar ul ul {
+	animation: opa1 0.5s 0.1s both;	/*0.1秒待機後、0.5秒かけてフェードイン表示*/
+}
+
+
+/*大きな端末用のドロップダウンメニュー
+---------------------------------------------------------------------------*/
+/*ドロップダウンメニューブロック全体*/
+.large-screen #menubar ul ul {
+	position: absolute;z-index: 100;
+	width: 100%;
+}
+
+
+/*小さな端末用の開閉ブロック
+---------------------------------------------------------------------------*/
+/*メニューブロック設定*/
+.small-screen #menubar.display-block {
+	position: fixed;overflow: auto;z-index: 100;
+	left: 0px;top: 0px;
+	width: 100%;
+	height: 100%;
+	padding-top: 90px;
+	background: rgba(0,0,0,0.9);		/*背景色*/
+	animation: animation1 0.2s both;	/*animation1を実行する。0.2sは0.2秒の事。*/
+}
+
+/*メニュー１個あたりの設定*/
+.small-screen nav > ul > li {
+	border: 1px solid #ccc;	/*枠線の幅、線種、色*/
+	margin: 1rem;			/*メニューの外側に空けるスペース*/
+	border-radius: 5px;	/*角を丸くする指定*/
+	padding: 0 2rem;		/*メニュー内の余白。上下、左右へ。*/
+}
+
+/*文字色*/
+.small-screen #menubar, .small-screen #menubar a {
+	color: #fff;
+}
+
+/*900px以下でのみ表示させるブロック*/
+#menubar .sh {
+	padding: 1rem 2rem 2rem;	/*上、左右、下へのブロック内の余白*/
+}
+
+
+/*３本バー（ハンバーガー）アイコン設定
+---------------------------------------------------------------------------*/
+/*３本バーを囲むブロック*/
+#menubar_hdr {
+	animation: opa1 0s 0.2s both;
+	position: fixed;z-index: 101;
+	cursor: pointer;
+	right: 30px;			/*右からの配置場所指定*/
+	top: 30px;				/*上からの配置場所指定*/
+	padding: 16px 14px;		/*上下、左右への余白*/
+	width: 46px;			/*幅（３本バーが出ている場合の幅になります）*/
+	height: 46px;			/*高さ*/
+	display: flex;					/*flexボックスを使う指定*/
+	flex-direction: column;			/*子要素（３本バー）部分。flexはデフォルトで横並びになるので、それを縦並びに変更。*/
+	justify-content: space-between;	/*並びかたの種類の指定*/
+	background: rgba(0,0,0,0.5);	/*背景色。0,0,0は黒のことで0.5は色が50%出た状態。*/
+}
+
+/*バー１本あたりの設定*/
+#menubar_hdr span {
+	display: block;
+	transition: 0.3s;	/*アニメーションにかける時間。0.3秒。*/
+	border-top: 1.5px solid #fff;	/*線の幅、線種、色*/
+}
+
+/*×印が出ている状態の3本バーの背景色*/
+#menubar_hdr.ham {
+	background: #ff0000;
+}
+
+/*×印が出ている状態の設定。※１本目および２本目のバーの共通設定。*/
+#menubar_hdr.ham span:nth-of-type(1),
+#menubar_hdr.ham span:nth-of-type(3) {
+	transform-origin: center center;	/*変形の起点。センターに。*/
+	width: 20px;						/*バーの幅*/
+}
+
+/*×印が出ている状態の設定。※１本目のバー。*/
+#menubar_hdr.ham span:nth-of-type(1){
+	transform: rotate(45deg) translate(3.8px, 5px);	/*回転45°と、X軸Y軸への移動距離の指定*/
+}
+
+/*×印が出ている状態の設定。※３本目のバー。*/
+#menubar_hdr.ham span:nth-of-type(3){
+	transform: rotate(-45deg) translate(3.8px, -5px);	/*回転-45°と、X軸Y軸への移動距離の指定*/
+}
+
+/*×印が出ている状態の設定。※２本目のバー。*/
+#menubar_hdr.ham span:nth-of-type(2){
+	display: none;	/*２本目は使わないので非表示にする*/
+}
+
+
+/*フッター設定
+---------------------------------------------------------------------------*/
+footer small {font-size: 100%;}
+footer {
+	font-size: 0.7rem;		/*文字サイズ。bodyのfont-sizeの70%です。*/
+	background: #eee;		/*背景色*/
+	text-align: center;		/*内容をセンタリング*/
+	padding: 20px;			/*ボックス内の余白*/
+}
+
+/*リンクテキスト*/
+footer a {color: inherit;text-decoration: none;}
+
+/*著作部分*/
+footer .pr {display: block;}
+
+
+/*PAGE TOP（↑）設定
+---------------------------------------------------------------------------*/
+.pagetop-show {display: block;}
+
+/*ボタンの設定*/
+.pagetop a {
+	display: block;text-decoration: none;text-align: center;z-index: 99;
+	position: fixed;	/*スクロールに追従しない(固定で表示)為の設定*/
+	right: 20px;		/*右からの配置場所指定*/
+	bottom: 20px;		/*下からの配置場所指定*/
+	color: #fff;		/*文字色*/
+	font-size: 1.5rem;	/*文字サイズ*/
+	background: rgba(0,0,0,0.2);	/*背景色。0,0,0は黒の事で0.2は色が20%出た状態。*/
+	width: 60px;		/*幅*/
+	line-height: 60px;	/*高さ*/
+	border-radius: 50%;	/*円形にする*/
+}
+
+
+/*その他
+---------------------------------------------------------------------------*/
+.clearfix::after {content: "";display: block;clear: both;}
+.color-check, .color-check a {color: #ff0000 !important;}
+.l {text-align: left !important;}
+.c {text-align: center !important;}
+.r {text-align: right !important;}
+.ws {width: 95%;display: block;}
+.wl {width: 95%;display: block;}
+.mb0 {margin-bottom: 0px !important;}
+.mb30 {margin-bottom: 30px !important;}
+.look {display: inline-block;padding: 0px 10px;background: #eee;border: 1px solid #ccc; border-radius: 3px;margin: 5px 0; word-break: break-all;}
+.small {font-size: 0.75em;}
+.large {font-size: 2em; letter-spacing: 0.1em;}
+.pc {display: none;}
+.dn {display: none !important;}
+.block {display: block !important;}
+
+	/*画面幅900px以上の追加指定*/
+	@media screen and (min-width:900px) {
+
+	.ws {width: 48%;display: inline;}
+	.sh {display: none;}
+	.pc {display: block;}
+
+	}/*追加指定ここまで*/
+
+	/*mainブロック設定
+---------------------------------------------------------------------------*/
+/*mainブロックの設定*/
+main {
+	margin: 2rem 0;	/*ブロックの外側（上下、左右）に空けるスペース*/
+}
+
+/*main-contents-partsの設定*/
+.main-contents-parts {
+	margin-bottom: 30px;		/*ボックスの下に空けるスペース。sub-contents-partsとの間の余白です。*/
+}
+
+	/*画面幅900px以上の追加指定*/
+	@media screen and (min-width:900px) {
+
+	/*カラムで使う為の指定*/
+	main.column-parts {
+		display: flex;	/*flexボックスを使う指定*/
+		justify-content: space-between;	/*並びかたの種類の指定*/
+		gap: 2rem;						/*main-contents-partsとsub-contents-partsの間のマージン的な隙間*/
+	}
+	
+	/*main-contents-partsの設定*/
+	.main-contents-parts {
+		margin-bottom: 0;
+		order: 2;			/*並び順。数字の小さい順番に表示されます。*/
+		flex: 1;
+	}
+	
+	/*.sub-contents-parts*/
+	.sub-contents-parts {
+		width: 230px;	/*幅*/
+	}
+
+	/*1つ目のsub-contents*/
+	.sub-contents-parts:nth-child(2) {
+		order: 1;	/*並び順。数字の小さい順番に表示されます。*/
+	}
+	
+	}/*追加指定ここまで*/
+/*list-square-parts
+---------------------------------------------------------------------------*/
+/*listブロックを囲む外側のボックス*/
+.list-square-parts {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);	/*ここの「4」の数字が横に並べる数です。3列がいいなら(3, 1fr)です。*/
+	gap: 1rem;	/*マージン的な数値。サムネイル間を１文字分あけます。*/
+}
+
+/*ボックスを正方形にトリミングする為の指定なので変更しない。*/
+.list-square-parts .list-parts {
+	position: relative;
+	overflow: hidden;
+	height: 0;
+	padding-top: 100%;
+	border-radius: 10px;	/*角を丸くする指定。通常の四角形がよければこの１行削除。*/
+	box-shadow: 2px 2px 3px rgba(0,0,0,0.1);	/*ボックスの影。右へ、下へ、ぼかし幅。0,0,0は黒の事で0.1は色が10%出た状態。*/
+}
+.list-square-parts .list-parts a {
+	display: block;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+}
+.list-square-parts .list-parts img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	transition: 0.5s;	/*マウスオン時にかける時間。0.5秒。*/
+}
+
+/*マウスオン時の画像*/
+.list-square-parts .list-parts img:hover {
+	transform: scale(1.1);	/*1.1倍に拡大*/
+	filter: contrast(1.3);	/*コントラストを1.3倍*/
+}
