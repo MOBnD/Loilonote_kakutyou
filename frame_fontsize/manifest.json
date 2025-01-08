@@ -8,14 +8,14 @@
  "display"          : "standalone",
  "icons": [
   {
-   "src": "icon-512.png",
+   "src": "./images/512_icon.png",
    "sizes": "512x512",
-   "type": "images/512_icon.png"
+   "type": "image/png"
   },
   {
-   "src": "icon-192.png",
+   "src": "./images/192_icon.png",
    "sizes": "192x192",
-   "type": "images/192_icon.png"
+   "type": "image/png"
   }
  ]
 }
