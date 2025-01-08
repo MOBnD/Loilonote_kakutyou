@@ -154,13 +154,33 @@
 </a>
 </div>
 
-<h2>上付き文字と下付き文字</h2>
-<div>
-	<span class="character sup" onclick="copyToClipboard('²')">²</span>
-	<span class="character sup" onclick="copyToClipboard('³')">³</span>
-	<span class="character sub" onclick="copyToClipboard('₁')">₁</span>
-	<span class="character sub" onclick="copyToClipboard('₂')">₂</span>
-</div>
+<table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+        <tr>
+            <th>タイプ</th>
+            <th>文字</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>上付き文字</td>
+            <td><span class="character sup" onclick="copyToClipboard('²')">²</span></td>
+        </tr>
+        <tr>
+            <td>上付き文字</td>
+            <td><span class="character sup" onclick="copyToClipboard('³')">³</span></td>
+        </tr>
+        <tr>
+            <td>下付き文字</td>
+            <td><span class="character sub" onclick="copyToClipboard('₁')">₁</span></td>
+        </tr>
+        <tr>
+            <td>下付き文字</td>
+            <td><span class="character sub" onclick="copyToClipboard('₂')">₂</span></td>
+        </tr>
+    </tbody>
+</table>
+
 
 </div>
 <!--/.list-container-->
