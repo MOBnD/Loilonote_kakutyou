@@ -273,7 +273,7 @@ jsフォルダのfontSizeChanger.jsを開き、中のコメントを読んで変
 <script>
 	function copyToClipboard(text) {
 		navigator.clipboard.writeText(text).then(() => {
-			alert('クリップボードにコピーされました: ' + text);
+			//alert('クリップボードにコピーされました: ' + text);
 		}).catch(err => {
 			console.error('クリップボードへのコピーに失敗しました: ', err);
 		});
