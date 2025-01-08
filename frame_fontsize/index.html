@@ -154,6 +154,14 @@
 </a>
 </div>
 
+<h2>上付き文字と下付き文字</h2>
+<div>
+	<span class="character sup" onclick="copyToClipboard('²')">²</span>
+	<span class="character sup" onclick="copyToClipboard('³')">³</span>
+	<span class="character sub" onclick="copyToClipboard('₁')">₁</span>
+	<span class="character sub" onclick="copyToClipboard('₂')">₂</span>
+</div>
+
 </div>
 <!--/.list-container-->
 <div id="contents">
@@ -241,6 +249,16 @@ jsフォルダのfontSizeChanger.jsを開き、中のコメントを読んで変
 
 <!--このテンプレート専用のスクリプト-->
 <script src="js/main.js"></script>
+
+<script>
+	function copyToClipboard(text) {
+		navigator.clipboard.writeText(text).then(() => {
+			alert('クリップボードにコピーされました: ' + text);
+		}).catch(err => {
+			console.error('クリップボードへのコピーに失敗しました: ', err);
+		});
+	}
+</script>
 
 </body>
 </html>
