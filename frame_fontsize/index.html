@@ -377,16 +377,21 @@
             <td><span class="character" onclick="copyToClipboard('🪳')">G</span></td>
         </tr>
     </tbody>
-</table>
-<label for="colorPicker">色を選択:</label>
-    <input type="color" id="colorPicker" value="#ff0000">
+</table>    <label for="colorPicker">色を選択:</label>
+    <input type="color" id="colorPicker" value="#ff0000"><br><br>
+    
     <label for="alphaInput">透明度:</label>
     <input type="range" id="alphaInput" min="0" max="1" step="0.01" value="1">
-    <label for="widthInput">幅 (px):</label>
-    <input type="number" id="widthInput" value="500">
-    <label for="heightInput">高さ (px):</label>
-    <input type="number" id="heightInput" value="500">
-    <br><br>
+    <input type="number" id="alphaNumber" min="0" max="1" step="0.01" value="1"><br><br>
+
+    <label for="widthSlider">幅 (px):</label>
+    <input type="range" id="widthSlider" min="100" max="1000" step="10" value="500">
+    <input type="number" id="widthInput" min="100" max="1000" step="10" value="500"><br><br>
+
+    <label for="heightSlider">高さ (px):</label>
+    <input type="range" id="heightSlider" min="100" max="1000" step="10" value="500">
+    <input type="number" id="heightInput" min="100" max="1000" step="10" value="500"><br><br>
+
     <canvas id="canvas" style="display:none;"></canvas>
     <img id="outputImage" alt="生成された画像をここに表示">
 
@@ -422,9 +427,36 @@
 
         // 入力の変更イベントにより画像を更新
         document.getElementById('colorPicker').addEventListener('change', generateImage);
-        document.getElementById('alphaInput').addEventListener('input', generateImage);
-        document.getElementById('widthInput').addEventListener('change', generateImage);
-        document.getElementById('heightInput').addEventListener('change', generateImage);
+        document.getElementById('alphaInput').addEventListener('input', syncAlpha);
+        document.getElementById('alphaNumber').addEventListener('input', syncAlpha);
+        document.getElementById('widthSlider').addEventListener('input', syncWidth);
+        document.getElementById('widthInput').addEventListener('input', syncWidth);
+        document.getElementById('heightSlider').addEventListener('input', syncHeight);
+        document.getElementById('heightInput').addEventListener('input', syncHeight);
+
+        // 透明度の入力フィールドとスライダーを同期
+        function syncAlpha(event) {
+            const alphaValue = event.target.value;
+            document.getElementById('alphaInput').value = alphaValue;
+            document.getElementById('alphaNumber').value = alphaValue;
+            generateImage();
+        }
+
+        // 幅の入力フィールドとスライダーを同期
+        function syncWidth(event) {
+            const widthValue = event.target.value;
+            document.getElementById('widthSlider').value = widthValue;
+            document.getElementById('widthInput').value = widthValue;
+            generateImage();
+        }
+
+        // 高さの入力フィールドとスライダーを同期
+        function syncHeight(event) {
+            const heightValue = event.target.value;
+            document.getElementById('heightSlider').value = heightValue;
+            document.getElementById('heightInput').value = heightValue;
+            generateImage();
+        }
 
         // ページが読み込まれた際に画像を自動生成
         window.onload = generateImage;
