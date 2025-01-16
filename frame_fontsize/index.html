@@ -385,12 +385,9 @@
     <input type="number" id="widthInput" value="500">
     <label for="heightInput">高さ (px):</label>
     <input type="number" id="heightInput" value="500">
-    <button onclick="generateImage()">画像更新</button>
     <br><br>
     <canvas id="canvas" style="display:none;"></canvas>
     <img id="outputImage" alt="生成された画像をここに表示">
-    <br>
-    <a id="downloadLink" download="custom_image.png">画像をダウンロード</a>
 
     <script>
         function generateImage() {
@@ -411,11 +408,12 @@
             // キャンバスの内容を画像として表示
             const outputImage = document.getElementById('outputImage');
             outputImage.src = canvas.toDataURL('image/png');
-
-            // 画像をダウンロードリンクに設定
-            const imageLink = document.getElementById('downloadLink');
-            imageLink.href = outputImage.src;
         }
+
+        // カラーピッカー、幅、高さの入力が変更されたときに画像を更新
+        document.getElementById('colorPicker').addEventListener('change', generateImage);
+        document.getElementById('widthInput').addEventListener('change', generateImage);
+        document.getElementById('heightInput').addEventListener('change', generateImage);
 
         // ページが読み込まれた際に画像を自動生成
         window.onload = generateImage;
