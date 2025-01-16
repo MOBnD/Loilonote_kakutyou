@@ -379,13 +379,13 @@
     </tbody>
 </table>
 
-<label for="colorPicker">色を選択:</label>
+    <label for="colorPicker">色を選択:</label>
     <input type="color" id="colorPicker" value="#ff0000">
     <label for="widthInput">幅 (px):</label>
     <input type="number" id="widthInput" value="500">
     <label for="heightInput">高さ (px):</label>
     <input type="number" id="heightInput" value="500">
-    <button onclick="generateImage()">画像生成</button>
+    <button onclick="generateImage()">画像更新</button>
     <br><br>
     <canvas id="canvas" style="display:none;"></canvas>
     <img id="outputImage" alt="生成された画像をここに表示">
@@ -415,7 +415,12 @@
             // 画像をダウンロードリンクに設定
             const imageLink = document.getElementById('downloadLink');
             imageLink.href = outputImage.src;
-        }<!--/.list-container-->
+        }
+
+        // ページが読み込まれた際に画像を自動生成
+        window.onload = generateImage;
+    </script>
+<!--/.list-container-->
 <div id="contents">
 <h2>更新情報</h2>
 <ul>
