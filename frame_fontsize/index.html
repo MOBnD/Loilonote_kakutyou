@@ -379,29 +379,43 @@
     </tbody>
 </table>
 
+<label for="colorPicker">色を選択:</label>
     <input type="color" id="colorPicker" value="#ff0000">
+    <label for="widthInput">幅 (px):</label>
+    <input type="number" id="widthInput" value="500">
+    <label for="heightInput">高さ (px):</label>
+    <input type="number" id="heightInput" value="500">
     <button onclick="generateImage()">画像生成</button>
+    <br><br>
+    <canvas id="canvas" style="display:none;"></canvas>
+    <img id="outputImage" alt="生成された画像をここに表示">
     <br>
-    <canvas id="canvas" width="500" height="500"></canvas>
-    <br>
-    <a id="downloadLink" download="custom_image.png">ダウンロード</a>
+    <a id="downloadLink" download="custom_image.png">画像をダウンロード</a>
 
     <script>
         function generateImage() {
             const canvas = document.getElementById('canvas');
             const ctx = canvas.getContext('2d');
             const color = document.getElementById('colorPicker').value;
+            const width = parseInt(document.getElementById('widthInput').value);
+            const height = parseInt(document.getElementById('heightInput').value);
+
+            // キャンバスのサイズを設定
+            canvas.width = width;
+            canvas.height = height;
 
             // 指定された色でキャンバスを塗りつぶす
             ctx.fillStyle = color;
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+            // キャンバスの内容を画像として表示
+            const outputImage = document.getElementById('outputImage');
+            outputImage.src = canvas.toDataURL('image/png');
+
             // 画像をダウンロードリンクに設定
             const imageLink = document.getElementById('downloadLink');
-            imageLink.href = canvas.toDataURL('image/png');
-        }
-    </script>
-<!--/.list-container-->
+            imageLink.href = outputImage.src;
+        }<!--/.list-container-->
 <div id="contents">
 <h2>更新情報</h2>
 <ul>
