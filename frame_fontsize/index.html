@@ -379,6 +379,28 @@
     </tbody>
 </table>
 
+    <input type="color" id="colorPicker" value="#ff0000">
+    <button onclick="generateImage()">画像生成</button>
+    <br>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <br>
+    <a id="downloadLink" download="custom_image.png">ダウンロード</a>
+
+    <script>
+        function generateImage() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            const color = document.getElementById('colorPicker').value;
+
+            // 指定された色でキャンバスを塗りつぶす
+            ctx.fillStyle = color;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 画像をダウンロードリンクに設定
+            const imageLink = document.getElementById('downloadLink');
+            imageLink.href = canvas.toDataURL('image/png');
+        }
+    </script>
 <!--/.list-container-->
 <div id="contents">
 <h2>更新情報</h2>
