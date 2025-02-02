@@ -536,7 +536,7 @@ main {
 	height: 0;
 	padding-top: 100%;
 	border-radius: 10px;	/*角を丸くする指定。通常の四角形がよければこの１行削除。*/
-	box-shadow: 2px 2px 3px rgba(0,0,0,0.1);	/*ボックスの影。右へ、下へ、ぼかし幅。0,0,0は黒の事で0.1は色が10%出た状態。*/
+	box-shadow: 2px 2px 0px rgba(0,0,0,0.1);	/*ボックスの影。右へ、下へ、ぼかし幅。0,0,0は黒の事で0.1は色が10%出た状態。*/
 }
 .list-square-parts .list-parts a {
 	display: block;
@@ -551,7 +551,7 @@ main {
 	height: 100%;
 	object-fit: contain;
 	object-position: center;
-	transition: 0.1s;	/*マウスオン時にかける時間。0.5秒。*/
+	transition: 0.0s;	/*マウスオン時にかける時間。0.5秒。*/
 }
 
 /*マウスオン時の画像*/
