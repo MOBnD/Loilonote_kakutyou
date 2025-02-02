@@ -549,9 +549,9 @@ main {
 .list-square-parts .list-parts img {
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
+	object-fit: contain;
 	object-position: center;
-	transition: 0.5s;	/*マウスオン時にかける時間。0.5秒。*/
+	transition: 0.1s;	/*マウスオン時にかける時間。0.5秒。*/
 }
 
 /*マウスオン時の画像*/
