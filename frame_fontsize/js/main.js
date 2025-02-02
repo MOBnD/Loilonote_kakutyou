@@ -84,7 +84,7 @@ $('.ddmenu').on('touchstart', function(e) {
     var touchDifference = touchStartY - touchEndY;
     
     // スクロール動作でない（差分が小さい）場合にのみドロップダウンを制御
-    if (Math.abs(touchDifference) < 10) { // 10px以下の移動ならタップとみなす
+    if (Math.abs(touchDifference) < 100) { // 10px以下の移動ならタップとみなす
         var $nextUl = $(this).next('ul');
         if ($nextUl.is(':visible')) {
             $nextUl.stop().hide();
