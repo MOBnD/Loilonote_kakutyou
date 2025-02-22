@@ -595,8 +595,9 @@ https://drive.google.com/drive/folders/1G8n_QFJQ4HbEGzyCJBOVjULsLh8TlGeU" target
 
 <script>
 	function copyToClipboard(text) {
-		navigator.clipboard.writeText(text).then(() => {
-			//alert('クリップボードにコピーされました: ' + text);
+		navigator.clipboard.writeText(text)
+		.then(() => {
+			alert('クリップボードにコピーされました: ' + text);
 		}).catch(err => {
 			console.error('クリップボードへのコピーに失敗しました: ', err);
 		});
